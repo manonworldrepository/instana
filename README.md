@@ -1,30 +1,7 @@
-# Getting Started
+# Instana
 
-### Reference Documentation
-For further reference, please consider the following sections:
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.5/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.5/maven-plugin/build-image.html)
-* [GraalVM Native Image Support](https://docs.spring.io/spring-boot/3.3.5/reference/packaging/native-image/introducing-graalvm-native-images.html)
-* [Spring Reactive Web](https://docs.spring.io/spring-boot/3.3.5/reference/web/reactive.html)
-
-### Guides
-The following guides illustrate how to use some features concretely:
-
-* [Building a Reactive RESTful Web Service](https://spring.io/guides/gs/reactive-rest-service/)
-
-### Additional Links
-These additional references should also help you:
-
-* [Configure AOT settings in Build Plugin](https://docs.spring.io/spring-boot/3.3.5/how-to/aot.html)
-
-## GraalVM Native Support
-
-This project has been configured to let you generate either a lightweight container or a native executable.
-It is also possible to run your tests in a native image.
-
-### Lightweight Container with Cloud Native Buildpacks
+### Lightweight Container with Cloud Native Buildpacks (Ahead of Time)
 If you're already familiar with Spring Boot container images support, this is the easiest way to get started.
 Docker should be installed and configured on your machine prior to creating the image.
 
@@ -39,6 +16,18 @@ Then, you can run the app like any other container:
 ```
 $ docker run -p 8080:8080 --rm instana:0.0.1-SNAPSHOT
 ```
+
+#### Application [URL: http://localhost:8080/stats](localhost:8080/stats)
+
+For single line input (one graph), you can use postman to create a ``` POST ``` request with a file upload (Multipart Request)
+
+Attach a file as an input: ``` src/test/resources/Input/single-line-input.txt ``` and use key as ``` file ``` in the body and use ``` form-data/multipart ```
+
+As shown in the small recording [here](./Recording2024-11-03%20063919.mp4).
+
+And finally, you can also use the file ``` multi-line-input.txt ``` in order to test multi line support.
+
+Note: Every line (graph) will be processed reactively and results will be streamed to the output line by line (graph by graph) over HTTP using octet streams.
 
 ### Executable with Native Build Tools
 Use this option if you want to explore more options such as running your tests in a native image.
@@ -60,17 +49,12 @@ $ target/instana
 You can also run your existing tests suite in a native image.
 This is an efficient way to validate the compatibility of your application.
 
-To run your existing tests in a native image, run the following goal:
+To run the existing tests in a native image, run the following goal:
 
 ```
 $ ./mvnw test -PnativeTest
 ```
 
 
-### Maven Parent overrides
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
 
