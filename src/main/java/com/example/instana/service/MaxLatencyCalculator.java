@@ -4,6 +4,7 @@ import com.example.instana.model.Graph;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.util.LinkedList;
+import java.util.logging.Level;
 
 public class MaxLatencyCalculator implements PathCalculationStrategy {
     private final int maxLatency;
@@ -16,7 +17,8 @@ public class MaxLatencyCalculator implements PathCalculationStrategy {
     public Mono<Long> calculatePaths(Graph graph, String start, String end) {
         return countPaths(graph, start, end, 0, new LinkedList<>())
             .reduce(0, Integer::sum)
-            .map(Long::valueOf);
+            .map(Long::valueOf)
+            .log(getClass().getSimpleName(), Level.INFO);
     }
 
     private Flux<Integer> countPaths(Graph graph, String current, String end, int currentLatency, LinkedList<String> path) {
@@ -38,6 +40,7 @@ public class MaxLatencyCalculator implements PathCalculationStrategy {
                     currentLatency + point.getLatency(),
                     new LinkedList<>(path)
                 ))
+                .log(getClass().getSimpleName(), Level.INFO)
         );
     }
 }

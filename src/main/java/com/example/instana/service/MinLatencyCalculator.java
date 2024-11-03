@@ -6,6 +6,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class MinLatencyCalculator implements PathCalculationStrategy {
 
@@ -16,7 +17,8 @@ public class MinLatencyCalculator implements PathCalculationStrategy {
 
         return shortestLatency == Integer.MAX_VALUE
                 ? Mono.error(new RuntimeException("NO SUCH TRACE"))
-                : Mono.just((long) shortestLatency);
+                : Mono.just((long) shortestLatency)
+                .log(getClass().getSimpleName(), Level.INFO);
     }
 
     private int findShortestPath(Graph graph, String current, String target, int currentLatency, Set<String> visited, int shortestLatency) {
