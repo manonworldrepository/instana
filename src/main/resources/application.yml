@@ -1,0 +1,9 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      location: ${java.io.tmpdir}
+      max-file-size: 128KB
+      max-request-size: 128KB
+  application:
+    name: instana

@@ -1,0 +1,13 @@
+spring:
+
+  # Input Stubs
+  single-line-input: Input/single-line-input.txt
+  multi-line-input: Input/multi-line-input.txt
+  empty-input: Input/empty-input.txt
+  mixed-input: Input/mixed-input.txt
+  sample-input: Input/sample-input.txt
+  malformed-input: Input/malformed-input.txt
+
+  # Expected Output Stubs
+  single-line-output: Output/single-line-output.txt
+  multi-line-output: Output/multi-line-output.txt
