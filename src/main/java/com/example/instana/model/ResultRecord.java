@@ -1,16 +1,13 @@
 package com.example.instana.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class ResultRecord {
     private final String id;
     private final Object result;
-
-    public ResultRecord(String id, Object result) {
-        this.id = id;
-        this.result = result;
-    }
 
     @Override
     public String toString() {
