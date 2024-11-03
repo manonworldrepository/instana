@@ -4,6 +4,8 @@ import com.example.instana.model.Graph;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.logging.Level;
+
 public class ExactHopsCalculator implements PathCalculationStrategy {
     private final int exactHops;
 
@@ -14,7 +16,8 @@ public class ExactHopsCalculator implements PathCalculationStrategy {
     @Override
     public Mono<Long> calculatePaths(Graph graph, String start, String end) {
         return explorePaths(graph, start, end, 0)
-            .count();
+            .count()
+            .log(getClass().getSimpleName(), Level.INFO);
     }
 
     private Flux<String> explorePaths(Graph graph, String current, String end, int depth) {
@@ -25,6 +28,7 @@ public class ExactHopsCalculator implements PathCalculationStrategy {
         }
 
         return Flux.fromIterable(graph.getEdges(current))
-            .flatMap(point -> explorePaths(graph, point.getEnd(), end, depth + 1));
+            .flatMap(point -> explorePaths(graph, point.getEnd(), end, depth + 1))
+            .log(getClass().getSimpleName(), Level.INFO);
     }
 }
