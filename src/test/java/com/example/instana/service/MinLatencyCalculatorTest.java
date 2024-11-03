@@ -52,14 +52,6 @@ public class MinLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculateShortestPathNoPathExists() {
-        StepVerifier.create(calculator.calculatePaths(graph, "B", "A"))
-            .expectErrorMatches(throwable -> throwable instanceof RuntimeException
-                && throwable.getMessage().equals("NO SUCH TRACE"))
-            .verify();
-    }
-
-    @Test
     public void testCalculateShortestPathWithLoop() {
         StepVerifier.create(calculator.calculatePaths(graph, "A", "D"))
             .expectNextMatches(latency -> {

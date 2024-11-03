@@ -16,7 +16,7 @@ public class MinLatencyCalculator implements PathCalculationStrategy {
         int shortestLatency = findShortestPath(graph, start, end, 0, visited, Integer.MAX_VALUE);
 
         return shortestLatency == Integer.MAX_VALUE
-                ? Mono.error(new RuntimeException("NO SUCH TRACE"))
+                ? Mono.empty()
                 : Mono.just((long) shortestLatency)
                 .log(getClass().getSimpleName(), Level.INFO);
     }
