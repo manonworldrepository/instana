@@ -21,18 +21,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
+    - uses: graalvm/setup-graalvm@v1
       with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
-
-    - name: Install SDK
-      run: sudo apt install unzip zip && curl -s "https://get.sdkman.io" | bash
-
-    - name: Install GraalVM
-      run: source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 21.0.5-graal && gu install native-image
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Example step
+      run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
 
     - name: Compile Native
       run: ./mvnw native:compile -Pnative
