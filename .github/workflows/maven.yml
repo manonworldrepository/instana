@@ -29,10 +29,10 @@ jobs:
         cache: maven
 
     - name: Install SDK
-      run: sudo apt install unzip zip && sudo curl -s "https://get.sdkman.io" | bash && source "/home/runner/.sdkman/bin/sdkman-init.sh"
+      run: sudo apt install unzip zip && curl -s "https://get.sdkman.io" | bash
 
     - name: Install GraalVM
-      run: sdk install java 21.0.5-graal
+      run: source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 21.0.5-graal
 
     - name: Compile Native
       run: ./mvnw native:compile -Pnative
