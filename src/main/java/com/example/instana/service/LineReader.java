@@ -53,7 +53,7 @@ public class LineReader {
                 String end = point.substring(1, 2);
                 int latency = Integer.parseInt(point.substring(2));
 
-                log.info("Parsed point: " + start + " -> " + end + " with latency " + latency);
+                log.info("Parsed point: {} -> {} with latency {}", start, end, latency);
                 graph.addEdge(new Point(start, end, latency));
             }
         } catch (Exception e) {
