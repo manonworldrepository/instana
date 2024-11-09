@@ -26,7 +26,7 @@ jobs:
           java-version: '21'
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Example step
+    - name: Get Stack Versions
       run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
@@ -38,3 +38,6 @@ jobs:
 
     - name: Test Native
       run: ./mvnw test -PnativeTest
+
+    - name: Test Non Native
+      run: ./mvnw clean test
