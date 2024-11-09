@@ -32,7 +32,7 @@ jobs:
       run: sudo apt install unzip zip && curl -s "https://get.sdkman.io" | bash
 
     - name: Install GraalVM
-      run: source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 21.0.5-graal
+      run: source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk install java 21.0.5-graal && $GRAALVM_HOME/bin/gu install native-image
 
     - name: Compile Native
       run: ./mvnw native:compile -Pnative
