@@ -3,6 +3,7 @@ package com.example.instana.service;
 import com.example.instana.model.Graph;
 import com.example.instana.model.Point;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@DisabledInNativeImage
 @SpringBootTest
 class LineReaderTest {
 
