@@ -28,6 +28,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Install SDK
+      run: apt install unzip zip && curl -s "https://get.sdkman.io" | bash && source "/home/ubuntu/.sdkman/bin/sdkman-init.sh"
+
+    - name: Install GraalVM
+      run: sdk install java 21.0.5-graal
+
     - name: Compile Native
       run: ./mvnw native:compile -Pnative
 
