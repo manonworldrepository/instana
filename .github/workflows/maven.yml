@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '21'
-          distribution: 'graalvm'
+          distribution: 'temurin'
       - uses: axel-op/googlejavaformat-action@v3
         with:
           args: "--dry-run --skip-sorting-imports"
