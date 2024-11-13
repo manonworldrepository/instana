@@ -22,9 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: graalvm/setup-graalvm@v1
+    - uses: axel-op/googlejavaformat-action@v3
       with:
           java-version: '21'
           distribution: 'graalvm'
+          args: "--skip-sorting-imports --replace"
           github-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Get Stack Versions
       run: |

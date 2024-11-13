@@ -10,7 +10,7 @@ import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class MinLatencyCalculatorTest {
+class MinLatencyCalculatorTest {
 
     private Graph graph;
     private MinLatencyCalculator calculator;
@@ -32,7 +32,7 @@ public class MinLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculateShortestPathSuccess() {
+    void testCalculateShortestPathSuccess() {
         StepVerifier.create(calculator.calculatePaths(graph, "A", "C"))
             .expectNextMatches(latency -> {
                 assertEquals(9, latency, "The shortest path from A to C should have a latency of 9.");
@@ -42,7 +42,7 @@ public class MinLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculateShortestPathWithMultiplePaths() {
+    void testCalculateShortestPathWithMultiplePaths() {
         StepVerifier.create(calculator.calculatePaths(graph, "A", "E"))
             .expectNextMatches(latency -> {
                 assertEquals(7, latency, "The shortest path from A to E should have a latency of 7.");
@@ -52,7 +52,7 @@ public class MinLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculateShortestPathWithLoop() {
+    void testCalculateShortestPathWithLoop() {
         StepVerifier.create(calculator.calculatePaths(graph, "A", "D"))
             .expectNextMatches(latency -> {
                 assertEquals(5, latency, "The shortest path from A to D should have a latency of 5.");

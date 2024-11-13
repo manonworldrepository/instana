@@ -10,7 +10,7 @@ import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class MaxLatencyCalculatorTest {
+class MaxLatencyCalculatorTest {
 
     private Graph graph;
 
@@ -29,7 +29,7 @@ public class MaxLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculatePathsWithStrictLatencyLimit10AC() {
+    void testCalculatePathsWithStrictLatencyLimit10AC() {
         MaxLatencyCalculator calculator = new MaxLatencyCalculator(10);
 
         StepVerifier.create(calculator.calculatePaths(graph, "A", "C"))
@@ -41,7 +41,7 @@ public class MaxLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculatePathsWithStrictLatencyLimit20AC() {
+    void testCalculatePathsWithStrictLatencyLimit20AC() {
         MaxLatencyCalculator calculator = new MaxLatencyCalculator(20);
 
         StepVerifier.create(calculator.calculatePaths(graph, "A", "C"))
@@ -53,7 +53,7 @@ public class MaxLatencyCalculatorTest {
     }
 
     @Test
-    public void testCalculatePathsWithStrictLatencyLimit20BD() {
+    void testCalculatePathsWithStrictLatencyLimit20BD() {
         MaxLatencyCalculator calculator = new MaxLatencyCalculator(20);
 
         StepVerifier.create(calculator.calculatePaths(graph, "B", "E"))

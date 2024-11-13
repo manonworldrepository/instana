@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -59,8 +58,7 @@ public class StatsController {
         );
 
         List<String> ids = IntStream.rangeClosed(1, 10)
-            .mapToObj(Integer::toString)
-            .collect(Collectors.toList());
+            .mapToObj(Integer::toString).toList();
 
         return Flux.concat(calculations)
             .zipWithIterable(ids)
@@ -69,6 +67,6 @@ public class StatsController {
     }
 
     private String formatResultRecord(ResultRecord resultRecord) {
-        return resultRecord.getId() + ". " + resultRecord.getResult();
+        return resultRecord.id() + ". " + resultRecord.result();
     }
 }

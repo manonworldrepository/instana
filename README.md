@@ -17,7 +17,7 @@ Then, you can run the app like any other container:
 $ docker run -p 8080:8080 --rm instana:0.0.1-SNAPSHOT
 ```
 
-#### Application [URL: http://localhost:8080/stats](localhost:8080/stats)
+#### Application [URL: http://localhost:8080/stats](http://localhost:8080/stats)
 
 For single line input (one graph), you can use postman to create a ``` POST ``` request with a file upload (Multipart Request)
 

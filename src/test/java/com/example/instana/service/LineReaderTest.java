@@ -19,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -61,7 +60,7 @@ class LineReaderTest {
 
             return edges.values().stream()
                 .flatMap(List::stream)
-                .collect(Collectors.toList());
+                .toList();
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException("Failed to access edges in Graph", e);
         }
