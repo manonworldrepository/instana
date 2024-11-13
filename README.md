@@ -1,7 +1,7 @@
 # Instana
 
 
-### Lightweight Container with Cloud Native Buildpacks (Ahead of Time)
+### Instana distributed tracing task on lightweight container with cloud native build packs (Ahead of Time)
 If you're already familiar with Spring Boot container images support, this is the easiest way to get started.
 Docker should be installed and configured on your machine prior to creating the image.
 
