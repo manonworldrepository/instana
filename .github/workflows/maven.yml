@@ -16,30 +16,25 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - uses: axel-op/googlejavaformat-action@v3
-    - uses: graalvm/setup-graalvm@v1
-      with:
+      - uses: actions/checkout@v4
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--skip-sorting-imports --replace"
+      - uses: graalvm/setup-graalvm@v1
+        with:
           java-version: '21'
           distribution: 'graalvm'
-          args: "--skip-sorting-imports --replace"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Get Stack Versions
-      run: |
+      - name: Get Stack Versions
+        run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
-
-    - name: Compile Native
-      run: ./mvnw native:compile -Pnative
-
-    - name: Test Native
-      run: ./mvnw test -PnativeTest
-
-    - name: Test Non Native
-      run: ./mvnw clean test
+      - name: Compile Native
+        run: ./mvnw native:compile -Pnative
+      - name: Test Native
+        run: ./mvnw test -PnativeTest
+      - name: Test Non Native
+        run: ./mvnw clean test
