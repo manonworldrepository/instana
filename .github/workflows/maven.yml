@@ -19,16 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--dry-run --skip-sorting-imports"
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           distribution: 'graalvm'
-      - name: Set up Google Java Format
-        run: |
-          curl -LJO https://github.com/google/google-java-format/releases/download/v1.13.0/google-java-format-1.13.0-all-deps.jar
-      - name: Format Code
-        run: |
-          find . -name "*.java" -print0 | xargs -0 java --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED -jar google-java-format-1.13.0-all-deps.jar --replace
       - name: Get Stack Versions
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
