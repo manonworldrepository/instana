@@ -67,6 +67,6 @@ public class StatsController {
     }
 
     private String formatResultRecord(ResultRecord resultRecord) {
-        return resultRecord.id() + ". " + resultRecord.result();
+        return resultRecord.getId() + ". " + resultRecord.getResult();
     }
 }
