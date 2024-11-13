@@ -21,8 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: graalvm/setup-graalvm@v1
     - uses: axel-op/googlejavaformat-action@v3
+    - uses: graalvm/setup-graalvm@v1
       with:
           java-version: '21'
           distribution: 'graalvm'
