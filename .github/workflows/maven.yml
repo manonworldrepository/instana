@@ -24,22 +24,24 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: axel-op/googlejavaformat-action@v3
+      - name: Lint
+        uses: axel-op/googlejavaformat-action@v3
         with:
           args: "--dry-run --skip-sorting-imports"
-      - uses: graalvm/setup-graalvm@v1
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           distribution: 'graalvm'
-      - name: Get Stack Versions
+      - name: Get Tech Stack Versions
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version
           native-image --version
+      - name: Test Non Native
+        run: ./mvnw clean test
       - name: Compile Native
         run: ./mvnw native:compile -Pnative
       - name: Test Native
         run: ./mvnw test -PnativeTest
-      - name: Test Non Native
-        run: ./mvnw clean test
