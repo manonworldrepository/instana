@@ -1,4 +1,4 @@
-# Instana
+# Instana [![Java CI with Maven](https://github.com/manonworldrepository/instana/actions/workflows/maven.yml/badge.svg)](https://github.com/manonworldrepository/instana/actions/workflows/maven.yml)
 
 
 ### Instana distributed tracing task on lightweight container with cloud native build packs (Ahead of Time)
