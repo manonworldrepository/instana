@@ -36,6 +36,6 @@ public class StatsController {
                     .collectList()
                     .map(stringFormatterService::formatAllResults)
             )
-            .concatWith(Flux.just(""));
+            .concatWith(Flux.empty());
     }
 }
