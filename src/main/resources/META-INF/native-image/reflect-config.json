@@ -1,0 +1,12 @@
+[
+  {
+    "name": "org.springframework.http.codec.multipart.FilePart",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true,
+    "allDeclaredFields": true
+  },
+  {
+    "name": "org.springframework.http.codec.multipart.FilePart[]",
+    "unsafeAllocated": true
+  }
+]
