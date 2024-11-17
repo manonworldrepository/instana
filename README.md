@@ -57,4 +57,6 @@ $ ./mvnw test -PnativeTest
 
 
 
+### Swagger Endpoint
 
+http://localhost:8080/webjars/swagger-ui/index.html
