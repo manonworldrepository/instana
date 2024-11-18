@@ -4,13 +4,11 @@ import com.example.instana.model.Graph;
 import com.example.instana.model.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.List;
 
-@SpringBootTest
 class LatencyCalculatorTest {
 
     private Graph graph;

@@ -3,27 +3,26 @@ package com.example.instana.service;
 import com.example.instana.model.Graph;
 import com.example.instana.model.Point;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.codec.multipart.FilePart;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@DisabledInNativeImage
 @SpringBootTest
 class LineReaderTest {
 
@@ -42,12 +41,47 @@ class LineReaderTest {
     private final LineReader lineReader = new LineReader();
 
     private FilePart mockFilePartFromResource(String resourcePath) throws IOException {
-        ClassPathResource resource = new ClassPathResource(resourcePath);
-        String content = Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
-        FilePart filePart = mock(FilePart.class);
-        DataBuffer dataBuffer = new DefaultDataBufferFactory().wrap(content.getBytes(StandardCharsets.UTF_8));
-        when(filePart.content()).thenReturn(Flux.just(dataBuffer));
-        return filePart;
+        InputStream resource = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        assert resource != null;
+
+        byte[] data = resource.readAllBytes();
+        resource.close();
+
+        return new FilePart() {
+            @Override
+            public String filename() {
+                return resourcePath;
+            }
+
+            @Override
+            public Mono<Void> transferTo(Path dest) {
+                return Mono.fromRunnable(() -> {
+                    try {
+                        Files.write(dest, data);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                });
+            }
+
+            @Override
+            public String name() {
+                return "file";
+            }
+
+            @Override
+            public HttpHeaders headers() {
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.TEXT_PLAIN);
+                return headers;
+            }
+
+            @Override
+            public Flux<DataBuffer> content() {
+                DataBuffer dataBuffer = new DefaultDataBufferFactory().wrap(data);
+                return Flux.just(dataBuffer);
+            }
+        };
     }
 
     private List<Point> getAllEdges(Graph graph) {

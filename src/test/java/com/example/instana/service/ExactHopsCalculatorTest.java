@@ -4,11 +4,9 @@ import com.example.instana.model.Graph;
 import com.example.instana.model.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import reactor.test.StepVerifier;
 import reactor.core.publisher.Mono;
 
-@SpringBootTest
 class ExactHopsCalculatorTest {
 
     private Graph graph;
