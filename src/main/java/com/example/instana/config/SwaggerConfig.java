@@ -21,22 +21,4 @@ public class SwaggerConfig {
             .pathsToMatch(paths)
             .build();
     }
-
-    @Bean
-    public OpenApiCustomizer customiseOpenApi() {
-        return openApi -> openApi.getPaths()
-                .forEach((path, pathItem) -> pathItem.readOperations().forEach(operation -> {
-                    if (path.equals("/stats") && operation.getOperationId() != null && operation.getOperationId().equals("index")) {
-                        RequestBody requestBody = new RequestBody()
-                            .required(true)
-                            .content(new Content().addMediaType("multipart/form-data",
-                                new io.swagger.v3.oas.models.media.MediaType().schema(new Schema<>()
-                                    .type("object")
-                                    .addProperty("file", new Schema<>().type("string").format("binary"))
-                                )
-                            ));
-                        operation.setRequestBody(requestBody);
-                    }
-                }));
-    }
 }
